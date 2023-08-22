@@ -1,6 +1,7 @@
 import express, { Application, Request, NextFunction, Response } from "express";
 import cors from "cors";
 import { ErrorNotifier, STATUSCODE } from "./error/ErrorNotifier";
+import auth from "./router/AuthRouter";
 import { errorHost } from "./error/ErrorHost";
 
 export const myAppConnect = (app: Application) => {
@@ -19,6 +20,7 @@ export const myAppConnect = (app: Application) => {
       return res.status(STATUSCODE.BAD).json({ message: "Error" });
     }
   });
+  app.use("/api", auth);
 
   app
     .all("*", (req: Request, res: Response, next: NextFunction) => {
