@@ -1,4 +1,5 @@
 import express, { Application, Request, NextFunction, Response } from "express";
+import done from "./router/DoneRouter"
 import cors from "cors";
 import { ErrorNotifier, STATUSCODE } from "./error/ErrorNotifier";
 import auth from "./router/AuthRouter";
@@ -25,6 +26,7 @@ export const myAppConnect = (app: Application) => {
   app.use("/api", auth);
   app.use("/api", task);
   app.use("/api", progress);
+  app.use("/api", done);
 
   app
     .all("*", (req: Request, res: Response, next: NextFunction) => {
