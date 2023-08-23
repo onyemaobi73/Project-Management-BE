@@ -41,7 +41,7 @@ export const deleteDoneUser = async(req: Request, res: Response) =>{
         const user = DoneModel.findById(id)
 
         return res.status(STATUSCODE.OK).json({message: "Done task has been deleted", data: user})
-    } catch (error) {
+    } catch (error: any) {
         return res.status(STATUSCODE.BAD).json({message: "Unable to delete done task", data: error.message})
     }
 }

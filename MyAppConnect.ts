@@ -4,6 +4,7 @@ import { ErrorNotifier, STATUSCODE } from "./error/ErrorNotifier";
 import auth from "./router/AuthRouter";
 import progress from "./router/ProgressRouter"
 import task from "./router/TaskRouter";
+import done from "./router/DoneRouter"
 import { errorHost } from "./error/ErrorHost";
 
 export const myAppConnect = (app: Application) => {
@@ -25,6 +26,7 @@ export const myAppConnect = (app: Application) => {
   app.use("/api", auth);
   app.use("/api", task);
   app.use("/api", progress);
+  app.use("/api", done);
 
   app
     .all("*", (req: Request, res: Response, next: NextFunction) => {
