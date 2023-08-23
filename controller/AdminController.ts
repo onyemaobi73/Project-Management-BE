@@ -4,6 +4,7 @@ import cloudinary from "../utils/cloudinary";
 import AdminModel from "../model/AdminModel";
 import { STATUSCODE } from "../error/ErrorNotifier";
 
+
 export const registerAdmin = async (req: any, res: Response) => {
   try {
     const { adminName, adminEmail, adminPassword } = req.body;
