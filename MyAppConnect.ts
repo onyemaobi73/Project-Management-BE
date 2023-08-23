@@ -5,7 +5,6 @@ import { ErrorNotifier, STATUSCODE } from "./error/ErrorNotifier";
 import auth from "./router/AuthRouter";
 import progress from "./router/ProgressRouter"
 import task from "./router/TaskRouter";
-import done from "./router/DoneRouter"
 import { errorHost } from "./error/ErrorHost";
 
 export const myAppConnect = (app: Application) => {

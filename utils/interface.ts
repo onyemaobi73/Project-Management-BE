@@ -6,20 +6,27 @@ export interface iAuth {
   password?: string;
   avatar?: string;
   avatarID?: string;
+  task?: {}
 }
 
 export interface iTask {
-  taskName?: string;
+  name?: string;
   taskAvatar?: string;
   task?: string;
   priority?: string;
+  taskStatus : string
+  progress : {}[];
+  // done : {}[]
 }
 
 export interface iProgress {
-  task?: string;
-  avatar?: string;
-  name?: string;
-  priority?: string;
+  progressTask?: string;
+  progressAvatar?: string;
+  progressName?: string;
+  progressPriority?: string;
+  progressStatus?: string;
+  done: {}[];
+  task?: {}
 }
 
 export interface iDone {
@@ -28,6 +35,7 @@ export interface iDone {
   doneAvatar?: string;
   donePriority?: string;
   // task?: {};
+  progress?: {}
 }
 
 export interface iAuthData extends iAuth, mongoose.Document {}

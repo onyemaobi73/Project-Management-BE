@@ -14,6 +14,7 @@ const DoneModel = new mongoose.Schema<iDone>({
     donePriority: {
         type: String
     }
+
 }, {timestamps: true})
 
 export default mongoose.model<iDoneData>("dones", DoneModel)

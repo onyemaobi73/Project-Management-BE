@@ -1,13 +1,18 @@
 import { Request, Response } from "express";
 import DoneModel from "../model/DoneModel";
 import { STATUSCODE } from "../error/ErrorNotifier";
+import AuthModel from "../model/AuthModel";
 
 export const createDoneUsers = async(req: Request, res: Response) =>{
     try {
-        const { doneName, donePriority, doneAvatar, doneTask } = req.body;
-        const user = await DoneModel.create({ doneName, donePriority, doneAvatar, doneTask})
+        const { id } = req.params;
+        const { donePriority,  doneTask } = req.body;
 
-        return res.status(STATUSCODE.CREATE).json({message: "done has been created", data: user})
+        const user = await AuthModel.findById(id)
+
+        const done = await DoneModel.create({ doneName: user?.name, donePriority, doneAvatar: user?.avatar, doneTask})
+
+        return res.status(STATUSCODE.CREATE).json({message: "done has been created", data: done})
     } catch (error: any) {
         return res.status(STATUSCODE.BAD).json({message: "unable to create done", data: error.message})
     }
