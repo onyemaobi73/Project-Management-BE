@@ -38,6 +38,16 @@ export interface iDone {
   progress?: {}
 }
 
+export interface iAdmin {
+  adminName?: string;
+  adminEmail?: string;
+  adminPassword?: string;
+  adminAvatar?: string;
+  adminAvatarID?: string;
+}
+
+export interface iAdminData extends iAdmin, mongoose.Document{}
+
 export interface iAuthData extends iAuth, mongoose.Document {}
 
 export interface iTaskData extends iTask, mongoose.Document {}

@@ -5,6 +5,6 @@ const router: Router = express()
 router.route("/create-progress").post(createProgress)
 router.route("/view-progress").get(readProgress)
 router.route("/:id/delete-progress").delete(deleteProgress)
-router.route("/:progressID/update-progress").patch(updateOneProgress)
+router.route("/:taskID/update-progress").patch(updateOneProgress)
 
 export default router

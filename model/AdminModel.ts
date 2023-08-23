@@ -1,0 +1,23 @@
+import mongoose from "mongoose";
+import { iAdmin, iAdminData } from "../utils/interface";
+
+ const adminModel = new mongoose.Schema<iAdmin>({
+  adminName: {
+    type: String,
+  },
+  adminEmail: {
+    type: String,
+    required: true,
+  },
+  adminPassword: {
+    type: String,
+  },
+  adminAvatar: {
+    type: String,
+  },
+  adminAvatarID: {
+    type: String,
+  },
+}, {timestamps: true});
+
+export default mongoose.model<iAdminData>("admins", adminModel);
