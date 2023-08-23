@@ -23,11 +23,11 @@ export interface iProgress {
 }
 
 export interface iDone {
-  assignedTask?: string;
-  assignedName?: string;
-  assignedAvatar?: string;
-  assignedPriority?: string;
-  task?: {};
+  doneTask?: string;
+  doneName?: string;
+  doneAvatar?: string;
+  donePriority?: string;
+  // task?: {};
 }
 
 export interface iAuthData extends iAuth, mongoose.Document {}

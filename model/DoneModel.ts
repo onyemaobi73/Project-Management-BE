@@ -2,21 +2,17 @@ import mongoose from "mongoose"
 import { iDone, iDoneData } from "../utils/interface"
 
 const DoneModel = new mongoose.Schema<iDone>({
-    assignedName: {
+    doneName: {
         type: String
     },
-    assignedAvatar:{
+    doneAvatar:{
         type: String
     },
-    assignedTask: {
+    doneTask: {
         type: String
     },
-    assignedPriority: {
+    donePriority: {
         type: String
-    },
-    task: {
-        type: mongoose.Types.ObjectId,
-        ref: "tasks"
     }
 }, {timestamps: true})
 
