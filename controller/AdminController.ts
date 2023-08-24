@@ -2,7 +2,9 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import cloudinary from "../utils/cloudinary";
 import AdminModel from "../model/AdminModel";
+import AuthModel from "../model/AuthModel"
 import { STATUSCODE } from "../error/ErrorNotifier";
+import mongoose from "mongoose";
 
 export const registerAdmin = async (req: any, res: Response) => {
   try {
@@ -26,6 +28,7 @@ export const registerAdmin = async (req: any, res: Response) => {
     return res.status(STATUSCODE.BAD).json({ message: "Error" });
   }
 };
+
 export const signInAdmin = async (req: Request, res: Response) => {
   try {
     const { adminEmail, adminPassword } = req.body;
@@ -34,12 +37,10 @@ export const signInAdmin = async (req: Request, res: Response) => {
     if (admin) {
       const hashed = await bcrypt.compare(adminPassword, admin?.adminPassword!);
       if (hashed) {
-        return res
-          .status(STATUSCODE.CREATE)
-          .json({
-            message: `welcome back ${admin.adminName}`,
-            data: admin._id,
-          });
+        return res.status(STATUSCODE.CREATE).json({
+          message: `welcome back ${admin.adminName}`,
+          data: admin._id,
+        });
       } else {
         return res
           .status(STATUSCODE.BAD)
@@ -52,6 +53,7 @@ export const signInAdmin = async (req: Request, res: Response) => {
     return res.status(STATUSCODE.BAD).json({ message: "Error" });
   }
 };
+
 export const viewAdmin = async (req: Request, res: Response) => {
   try {
     const admin = await AdminModel.find();
@@ -62,6 +64,7 @@ export const viewAdmin = async (req: Request, res: Response) => {
     return res.status(STATUSCODE.BAD).json({ message: "Error" });
   }
 };
+
 // export const updateAdmin = async (req:Request, res:Response)=>{
 //     try {
 //         const {adminName, adminPassword} = req.body
@@ -71,3 +74,23 @@ export const viewAdmin = async (req: Request, res: Response) => {
 //         return res.status(STATUSCODE.BAD).json({message:"Error"})
 //     }
 // }
+
+export const member = async(req: Request, res: Response) => {
+    try {
+      const { adminID, userID } = req.params;
+  
+      const admins: any = await AdminModel.findById(adminID)
+      const user: any = await AuthModel.findById(userID);
+  
+      if (user) {
+         await user.subordinate?.push(new mongoose.Types.ObjectId(userID))
+        user.save()
+  
+        return res.status(STATUSCODE.CREATE).json({message: `You are now a member of ${admins.adminName} team`})
+      } else {
+        return res.status(STATUSCODE.BAD).json({message: "Something went wrong"})
+      }
+    } catch (error) {
+      return res.status(STATUSCODE.BAD).json({message: "Error creating friends"})
+    }
+  }

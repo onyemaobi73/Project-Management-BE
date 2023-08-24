@@ -21,9 +21,15 @@ const authModel = new mongoose.Schema<iAuth>(
         type: String
     },
     task: {
-        type: mongoose.Types.ObjectId,
+      type: mongoose.Types.ObjectId,
         ref: "tasks"
+    },
+    admin: 
+        {
+      type: mongoose.Types.ObjectId,
+        ref: "admins"
     }
+
    }, {timestamps: true}
 )
 
