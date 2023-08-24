@@ -15,7 +15,7 @@ export const registerAdmin = async (req: any, res: Response) => {
     const { secure_url, public_id } = await cloudinary.uploader.upload(
       req.file?.path!
     );
-    const user = await AdminModel.create({
+    const admin = await AdminModel.create({
       adminName,
       adminEmail,
       adminPassword: hashed,
@@ -24,7 +24,7 @@ export const registerAdmin = async (req: any, res: Response) => {
     });
     return res
       .status(STATUSCODE.CREATE)
-      .json({ message: "user created", data: user });
+      .json({ message: "admin created", data: admin });
   } catch (error) {
     return res.status(STATUSCODE.BAD).json({ message: "Error" });
   }
