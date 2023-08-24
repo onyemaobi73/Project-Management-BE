@@ -21,13 +21,13 @@ const taskModel = new mongoose.Schema({
     },
     progress : [
         {
-            type : mongoose.Schema.Types.ObjectId,
+            type: mongoose.Types.ObjectId,
             ref : "progress"
         }
     ],
     done: [
         {
-            type: mongoose.Schema.Types.ObjectId, 
+            type: mongoose.Types.ObjectId, 
             ref: "dones"
         }
     ]

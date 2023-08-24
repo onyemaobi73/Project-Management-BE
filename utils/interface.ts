@@ -6,7 +6,17 @@ export interface iAuth {
   password?: string;
   avatar?: string;
   avatarID?: string;
+  admin: {};
   task?: {}
+}
+
+export interface iAdmin {
+  adminName?: string;
+  adminEmail?: string;
+  adminPassword?: string;
+  adminAvatar?: string;
+  adminAvatarID?: string;
+  subordinate?: {}[];
 }
 
 export interface iTask {
@@ -36,14 +46,6 @@ export interface iDone {
   donePriority?: string;
   // task?: {};
   progress?: {}
-}
-
-export interface iAdmin {
-  adminName?: string;
-  adminEmail?: string;
-  adminPassword?: string;
-  adminAvatar?: string;
-  adminAvatarID?: string;
 }
 
 export interface iAdminData extends iAdmin, mongoose.Document{}

@@ -18,6 +18,10 @@ import { iAdmin, iAdminData } from "../utils/interface";
   adminAvatarID: {
     type: String,
   },
+  subordinate: [{
+    type: mongoose.Types.ObjectId,
+    ref: "auths"
+  }]
 }, {timestamps: true});
 
 export default mongoose.model<iAdminData>("admins", adminModel);

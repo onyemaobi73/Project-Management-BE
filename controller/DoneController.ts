@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
 import DoneModel from "../model/DoneModel";
 import { STATUSCODE } from "../error/ErrorNotifier";
-import AuthModel from "../model/AuthModel";
+import ProgressModel from "../model/ProgressModel";
 
-export const createDoneUsers = async(req: Request, res: Response) =>{
+export const createDoneTask = async(req: Request, res: Response) =>{
     try {
         const { id } = req.params;
         const { donePriority,  doneTask } = req.body;
 
-        const user = await AuthModel.findById(id)
+        const user = await ProgressModel.findById(id)
 
-        const done = await DoneModel.create({ doneName: user?.name, donePriority, doneAvatar: user?.avatar, doneTask})
+        const done = await DoneModel.create({ doneName: user?.progressName, donePriority: user?.progressPriority, doneAvatar: user?.progressAvatar, doneTask: user?.progressTask})
 
         return res.status(STATUSCODE.CREATE).json({message: "done has been created", data: done})
     } catch (error: any) {
@@ -18,7 +18,7 @@ export const createDoneUsers = async(req: Request, res: Response) =>{
     }
 }
 
-export const readDoneUsers = async(req: Request, res: Response) =>{
+export const readDoneTask = async(req: Request, res: Response) =>{
     try {
         const user = await DoneModel.find()
 
@@ -28,7 +28,7 @@ export const readDoneUsers = async(req: Request, res: Response) =>{
     }
 }
 
-export const readOneDoneUsers = async(req: Request, res: Response) =>{
+export const readOneDoneTask = async(req: Request, res: Response) =>{
     try {
         const { id } = req.params;
         const user = await DoneModel.findById(id);
@@ -39,7 +39,7 @@ export const readOneDoneUsers = async(req: Request, res: Response) =>{
     }
 }
 
-export const deleteDoneUser = async(req: Request, res: Response) =>{
+export const deleteDoneTask = async(req: Request, res: Response) =>{
     try {
         const { id } = req.params;
 

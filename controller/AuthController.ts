@@ -7,8 +7,9 @@ import { STATUSCODE } from "../error/ErrorNotifier";
 export const registerUser = async (req: Request, res: Response) => {
   try {
     const { name, email, password } = req.body;
-    const slat = await bcrypt.genSalt(10);
-    const hashed = await bcrypt.hash(password, slat);
+    const salt = await bcrypt.genSalt(10);
+    const hashed = await bcrypt.hash(password, salt);
+
     const { secure_url, public_id } = await cloudinary.uploader.upload(req.file?.path!)
     const user = await AuthModel.create({
       name,
@@ -20,8 +21,8 @@ export const registerUser = async (req: Request, res: Response) => {
     return res
       .status(STATUSCODE.CREATE)
       .json({ message: "user created", data: user });
-  } catch (error) {
-    return res.status(STATUSCODE.BAD).json({ message: "Error" });
+  } catch (error: any) {
+    return res.status(STATUSCODE.BAD).json({ message: "Error", data: error.message });
   }
 };
 
@@ -48,6 +49,7 @@ export const signInUser = async (req: Request, res: Response) => {
     return res.status(STATUSCODE.BAD).json({ message: "Error" });
   }
 };
+
 export const getUsers = async (req: Request, res: Response) => {
   try {
     const user = await AuthModel.find();
@@ -58,6 +60,7 @@ export const getUsers = async (req: Request, res: Response) => {
     return res.status(STATUSCODE.BAD).json({ message: "Error" });
   }
 };
+
 export const getOneUser = async (req: Request, res: Response) => {
   try {
     const { userID } = req.params;
@@ -69,3 +72,4 @@ export const getOneUser = async (req: Request, res: Response) => {
     return res.status(STATUSCODE.BAD).json({ message: "Error" });
   }
 };
+
