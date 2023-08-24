@@ -2,6 +2,8 @@ import express, { Application } from "express"
 import { envVariables } from "./config/envVariables"
 import { DBConfig } from "./config/db"
 import { myAppConnect } from "./MyAppConnect"
+import dotenv from "dotenv"
+dotenv.config();
 
 const port: number = parseInt(envVariables.PORT)
 
