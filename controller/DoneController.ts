@@ -1,16 +1,10 @@
 import { Request, Response } from "express";
 import DoneModel from "../model/DoneModel";
 import { STATUSCODE } from "../error/ErrorNotifier";
-import ProgressModel from "../model/ProgressModel";
 
 export const createDoneTask = async(req: Request, res: Response) =>{
     try {
-        const { id } = req.params;
-        const { donePriority,  doneTask } = req.body;
-
-        const user = await ProgressModel.findById(id)
-
-        const done = await DoneModel.create({ doneName: user?.progressName, donePriority: user?.progressPriority, doneAvatar: user?.progressAvatar, doneTask: user?.progressTask})
+        const done = await DoneModel.create(req.body)
 
         return res.status(STATUSCODE.CREATE).json({message: "done has been created", data: done})
     } catch (error: any) {

@@ -41,30 +41,30 @@ export const readTask = async (req: Request, res: Response) => {
   }
 };
 
-export const updateOneTask = async (req: Request, res: Response) => {
-  try {
-    const { task, priority , taskStatus } = req.body;
-    const getTask = await TaskModel.findById(req.params.taskId)
-    if(taskStatus === false){
-return res.status(STATUSCODE.BAD).json({
-    message : "To start Task , please move to progess"
-})
-    }else{
-        const tasked = await TaskModel.findByIdAndUpdate(
-            getTask?._id,
-            { task, priority , taskStatus },
-            { new: true }
-          );
+// export const updateOneTask = async (req: Request, res: Response) => {
+//   try {
+//     const { task, priority , taskStatus } = req.body;
+//     const getTask = await TaskModel.findById(req.params.taskId)
+//     if(taskStatus === false){
+// return res.status(STATUSCODE.BAD).json({
+//     message : "To start Task , please move to progess"
+// })
+//     }else{
+//         const tasked = await TaskModel.findByIdAndUpdate(
+//             getTask?._id,
+//             { task, priority , taskStatus },
+//             { new: true }
+//           );
       
-          getTask?.progress?.push(new mongoose.Types.ObjectId(tasked?._id))
-          getTask?.save()
-          res.status(STATUSCODE.OK).json({ message: "task read", data: tasked });
-    }
+//           getTask?.progress?.push(new mongoose.Types.ObjectId(tasked?._id))
+//           getTask?.save()
+//           res.status(STATUSCODE.OK).json({ message: "task read", data: tasked });
+//     }
   
-  } catch (error: any) {
-    res.status(STATUSCODE.BAD).json({ message: "Error reading task" });
-  }
-};
+//   } catch (error: any) {
+//     res.status(STATUSCODE.BAD).json({ message: "Error reading task" });
+//   }
+// };
 
 export const readOneTask = async (req: Request, res: Response) => {
   try {
@@ -95,3 +95,5 @@ export const deleteTask = async (req: Request, res: Response) => {
       .json({ message: "Error deleting task ", data: error.message });
   }
 };
+
+

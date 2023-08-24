@@ -14,10 +14,6 @@ const progressModel = new mongoose.Schema({
     progressPriority:{
         type: String
     },
-    progressStatus: {
-        type: Boolean,
-        default: false
-    },
     task: {
       type: mongoose.Types.ObjectId,
         ref: "tasks"
